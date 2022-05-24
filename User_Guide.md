@@ -1,13 +1,9 @@
 
 # Introduction and citing PhysiCell 
 
-This user guide will teach you how to download and use PhysiCell
-[@ref:PhysiCell], as well as document the key classes and functions.
+This user guide will teach you how to download and use PhysiCell, as well as document the key classes and functions.
 Wherever possible, it will demonstrate with specific examples. Please
-note that this guide will be periodically updated. Users should check
-[PhysiCell.MathCancer.org](http://PhysiCell.MathCancer.org) for the
-latest version. The PhysiCell method paper was published in PLoS
-Computational Biology [@ref:PhysiCell].
+note that this guide will be periodically updated.
 
 If you use PhysiCell, please cite it as, for example (using the relevant Version #):
 ```
@@ -6465,19 +6461,26 @@ proliferation rate (for the total cell population) is on the order of
 For the Live cell model (Section
 [17.1.1](#sec:Standard_Models:Live){reference-type="ref"
 reference="sec:Standard_Models:Live"}), we fit the system of ODEs
+
 $$\begin{aligned}
 \frac{d}{dt}{\small \left[\texttt{Live}\right] } & = & (b-d){\small \left[\texttt{Live}\right] } \\
 \frac{d}{dt}{\small \left[\texttt{Apoptotic}\right] } & = & d{\small \left[\texttt{Live}\right] } - \frac{1}{T_A} {\small \left[\texttt{Apoptotic}\right] }, \end{aligned}$$
-and we note that $$\begin{aligned}
+
+and we note that 
+
+$$\begin{aligned}
 \frac{d}{dt}{\small \left[\texttt{Total}\right] } 
 & = & b {\small \left[\texttt{Live}\right] } - \frac{1}{T_A} {\small \left[\texttt{Apoptotic}\right] } \nonumber \\ 
 & = & \left( b (1-\textrm{AI}) - \frac{\textrm{AI}}{T_A} \right) {\small \left[\texttt{Total}\right] } \nonumber \\ 
-& = & r {\small \left[\texttt{Total}\right] } \end{aligned}$$ Here,
+& = & r {\small \left[\texttt{Total}\right] } \end{aligned}$$ 
+
+Here,
 $r = 0.04\textrm{ hr}^{-1}$, $\textrm{AI} = 0.02$ is the apoptotic
 index, and $T_A = 8.6 \textrm{ hour}$ (Section
 [17.2.1](#sec:Standard_Models:Apoptosis){reference-type="ref"
 reference="sec:Standard_Models:Apoptosis"}). Thus,
 $$b = \frac{r + \frac{1}{T_A}\textrm{AI}}{1 - \textrm{AI}} \sim 0.0432 \textrm{ hr}^{-1}.$$
+
 To get the death rate $d$, we use a simple iterative fitting method
 (see\
 `./documentation/matlab/tune_death_in_live_model`) to get
@@ -6493,15 +6496,21 @@ $d \sim 0.00319 \textrm{ hr}^{-1}$.
 For the Ki67 Basic model (Section
 [17.1.2](#sec:Standard_Models:Ki67_Basic){reference-type="ref"
 reference="sec:Standard_Models:Ki67_Basic"}), we fit the system of ODEs
+
 $$\begin{aligned}
 \frac{d}{dt}{\small \left[\texttt{Ki67-}\right] } & = & -\left( \frac{1}{T_Q} + d \right) {\small \left[\texttt{Ki67-}\right] } + \frac{2}{T_K}{\small \left[\texttt{Ki67+}\right] }  \\
 \frac{d}{dt}{\small \left[\texttt{Ki67+}\right] } & = & \frac{1}{T_Q} {\small \left[\texttt{Ki67-}\right] } - \left( \frac{1}{T_K} + d \right) {\small \left[\texttt{Ki67+}\right] } \\
 \frac{d}{dt}{\small \left[\texttt{Apoptotic}\right] } & = & d\left( {\small \left[\texttt{Ki67-}\right] } + {\small \left[\texttt{Ki67+}\right] } \right) -\frac{1}{T_A} {\small \left[\texttt{Apoptotic}\right] }, \end{aligned}$$
-and we note that $$\begin{aligned}
+
+and we note that 
+
+$$\begin{aligned}
 \frac{d}{dt}{\small \left[\texttt{Total}\right] } 
 & = & \frac{1}{t_K} {\small \left[\texttt{Ki67+}\right] } - \frac{1}{T_A} {\small \left[\texttt{Apoptotic}\right] } \nonumber \\ 
 & = & \left( \frac{\textrm{KI}}{T_K} - \frac{\textrm{AI}}{T_A} \right) {\small \left[\texttt{Total}\right] } \nonumber \\ 
-& = & r {\small \left[\texttt{Total}\right] } \end{aligned}$$ We set
+& = & r {\small \left[\texttt{Total}\right] } \end{aligned}$$ 
+
+We set
 $T_K = 13 + 2.5$ hr (the duration of the two phases in the Ki67 Advanced
 model), $r = 0.04 \textrm{ hr}^{-1}$, and we set AI = 0.02 as before and
 keep $d = 0.00319 \textrm{ hr}^{-1}$ from the prior estimate. We thus
@@ -6518,24 +6527,29 @@ $T_Q \sim 4.59 \textrm{ hr}$.
 
 For the Ki67 Advanced model (Section
 [17.1.3](#sec:Standard_Models:Ki67_Advanced){reference-type="ref"
-reference="sec:Standard_Models:Ki67_Advanced"}), we fit the system of
-ODEs $$\begin{aligned}
+reference="sec:Standard_Models:Ki67_Advanced"}), we fit the system of ODEs 
+
+$$\begin{aligned}
 \frac{d}{dt}{\small \left[\texttt{Ki67-}\right] } & = & -\left( \frac{1}{T_Q} + d \right) {\small \left[\texttt{Ki67-}\right] } + \frac{1}{T_{K2}}{\small \left[\texttt{Ki67+}\right] }_2  \\
 \frac{d}{dt}{\small \left[\texttt{Ki67+}\right] }_1 & = & \frac{1}{T_Q} {\small \left[\texttt{Ki67-}\right] } - \left( \frac{1}{T_{K1}} + d \right) {\small \left[\texttt{Ki67+}\right] }_1 \\
 \frac{d}{dt}{\small \left[\texttt{Ki67+}\right] }_2 & = &  \frac{2}{T_{K1}} {\small \left[\texttt{Ki67+}\right] }_1 - \left( \frac{1}{T_{K2}} + d \right) {\small \left[\texttt{Ki67+}\right] }_2 \\
 \frac{d}{dt}{\small \left[\texttt{Apoptotic}\right] } & = & d\left( {\small \left[\texttt{Ki67-}\right] } + {\small \left[\texttt{Ki67+}\right] }_1 + {\small \left[\texttt{Ki67+}\right] }_2 \right) -\frac{1}{T_A} {\small \left[\texttt{Apoptotic}\right] }, \end{aligned}$$
-and we note that $$\begin{aligned}
+
+and we note that
+
+$$\begin{aligned}
 \frac{d}{dt}{\small \left[\texttt{Total}\right] } 
 & = & \frac{1}{T_{K1}} {\small \left[\texttt{Ki67+}\right] }_1 - \frac{1}{T_A} {\small \left[\texttt{Apoptotic}\right] } \nonumber \\ 
 & = & \left( \frac{\textrm{KI}_1}{T_{K1}} - \frac{\textrm{AI}}{T_A} \right) {\small \left[\texttt{Total}\right] } \nonumber \\ 
-& = & r {\small \left[\texttt{Total}\right] } \end{aligned}$$ We set
-$T_{K1} = 13$ hr, $T_{K2} = 2.5$ hr, $T_A = 8.6$ hr, and
+& = & r {\small \left[\texttt{Total}\right] } 
+\end{aligned}$$ 
+
+We set $T_{K1} = 13$ hr, $T_{K2} = 2.5$ hr, $T_A = 8.6$ hr, and
 $r = 0.04 \textrm{ hr}^{-1}$, and we set AI = 0.02 as before and keep
 $d = 0.00319 \textrm{ hr}^{-1}$ from the prior estimate. We thus need to
 fit $T_Q$. We use a simple iterative fitting method (see
 `./documentation/matlab/tune_Ki67_advanced`) to get
 $T_Q \sim 3.62 \textrm{ hr}$ for this model. [@ref:Ki67_MCF10A].
-
 
 
 ------------------------------------------------------------------------
@@ -6546,17 +6560,23 @@ $T_Q \sim 3.62 \textrm{ hr}$ for this model. [@ref:Ki67_MCF10A].
 For the Flow Cytometry model (Section
 [17.1.4](#sec:Standard_Models:Flow_Cytometry){reference-type="ref"
 reference="sec:Standard_Models:Flow_Cytometry"}), we fit the system of
-ODEs $$\begin{aligned}
+ODEs 
+
+$$\begin{aligned}
 \frac{d}{dt}{\small \left[\texttt{G0G1}\right] } & = & -\left( \frac{1}{T_{G0G1}} + d \right) {\small \left[\texttt{G0G1}\right] } + \frac{2}{T_{G2M}}{\small \left[\texttt{G2M}\right] }  \\
 \frac{d}{dt}{\small \left[\texttt{S}\right] } & = & \frac{1}{T_{G0G1}} {\small \left[\texttt{G0G1}\right] } - \left( \frac{1}{T_{S}} + d \right) {\small \left[\texttt{S}\right] } \\
 \frac{d}{dt}{\small \left[\texttt{G2M}\right] } & = &  \frac{1}{T_{S}} {\small \left[\texttt{S}\right] } - \left( \frac{1}{T_{G2M}} + d \right) {\small \left[\texttt{G2M}\right] } \\
 \frac{d}{dt}{\small \left[\texttt{Apoptotic}\right] } & = & d\left( {\small \left[\texttt{G0G1}\right] } + {\small \left[\texttt{S}\right] } + {\small \left[\texttt{G2M}\right] } \right) -\frac{1}{T_A} {\small \left[\texttt{Apoptotic}\right] }, \end{aligned}$$
-and we note that $$\begin{aligned}
+
+and we note that 
+
+$$\begin{aligned}
 \frac{d}{dt}{\small \left[\texttt{Total}\right] } 
 & = & \frac{1}{T_{G2M}} {\small \left[\texttt{G2M}\right] } - \frac{1}{T_A} {\small \left[\texttt{Apoptotic}\right] } \nonumber \\ 
 & = & \left( \frac{1}{T_{G2M}} \frac{{\small \left[\texttt{G2M}\right] }}{{\small \left[\texttt{Total}\right] }} - \frac{\textrm{AI}}{T_A} \right) {\small \left[\texttt{Total}\right] } \nonumber \\ 
-& = & r {\small \left[\texttt{Total}\right] } \end{aligned}$$ For
-consistency with our estimates for the Ki67-Advanced model (see Section
+& = & r {\small \left[\texttt{Total}\right] } \end{aligned}$$ 
+
+For consistency with our estimates for the Ki67-Advanced model (see Section
 [21.3](#sec:parameters:Ki67_advanced){reference-type="ref"
 reference="sec:parameters:Ki67_advanced"}), we set $T_{S} = 8$ hr,
 $T_{G2M} = T_{G2} + T_{M} = 5$ hr, $T_A = 8.6$ hr, and
@@ -6576,18 +6596,24 @@ $T_{G0G1} \sim 5.15 \textrm{ hr}$ for this model. [@ref:Ki67_MCF10A].
 For the Flow Cytometry model (Section
 [17.1.5](#sec:Standard_Models:Flow_Cytometry_Separated){reference-type="ref"
 reference="sec:Standard_Models:Flow_Cytometry_Separated"}), we fit the
-system of ODEs $$\begin{aligned}
+system of ODEs 
+
+$$\begin{aligned}
 \frac{d}{dt}{\small \left[\texttt{G0G1}\right] } & = & -\left( \frac{1}{T_{G0G1}} + d \right) {\small \left[\texttt{G0G1}\right] } + \frac{2}{T_{M}}{\small \left[\texttt{M}\right] }  \\
 \frac{d}{dt}{\small \left[\texttt{S}\right] } & = & \frac{1}{T_{G0G1}} {\small \left[\texttt{G0G1}\right] } - \left( \frac{1}{T_{S}} + d \right) {\small \left[\texttt{S}\right] } \\
 \frac{d}{dt}{\small \left[\texttt{G2}\right] } & = &  \frac{1}{T_{S}} {\small \left[\texttt{S}\right] } - \left( \frac{1}{T_{G2}} + d \right) {\small \left[\texttt{G2}\right] } \\
 \frac{d}{dt}{\small \left[\texttt{M}\right] } & = &  \frac{1}{T_{G2}} {\small \left[\texttt{G2}\right] } - \left( \frac{1}{T_{M}} + d \right) {\small \left[\texttt{M}\right] } \\
 \frac{d}{dt}{\small \left[\texttt{Apoptotic}\right] } & = & d\left( {\small \left[\texttt{G0G1}\right] } + {\small \left[\texttt{S}\right] } + {\small \left[\texttt{G2}\right] } + {\small \left[\texttt{M}\right] } \right) -\frac{1}{T_A} {\small \left[\texttt{Apoptotic}\right] }, \end{aligned}$$
-and we note that $$\begin{aligned}
+
+and we note that 
+
+$$\begin{aligned}
 \frac{d}{dt}{\small \left[\texttt{Total}\right] } 
 & = & \frac{1}{T_{M}} {\small \left[\texttt{M}\right] } - \frac{1}{T_A} {\small \left[\texttt{Apoptotic}\right] } \nonumber \\ 
 & = & \left( \frac{{\small \left[\texttt{MI}\right] }}{T_{M}}  - \frac{\textrm{AI}}{T_A} \right) {\small \left[\texttt{Total}\right] } \nonumber \\ 
-& = & r {\small \left[\texttt{Total}\right] },\end{aligned}$$ where
-${\small \left[\texttt{MI}\right] }$ is the mitotic index.
+& = & r {\small \left[\texttt{Total}\right] },\end{aligned}$$ 
+
+where ${\small \left[\texttt{MI}\right] }$ is the mitotic index.
 
 For consistency with our estimates for the Ki67-Advanced model (see
 Section [21.3](#sec:parameters:Ki67_advanced){reference-type="ref"
